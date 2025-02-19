@@ -1,47 +1,27 @@
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
 import dotenv from "dotenv";
+import { PrismaDatabaseSeederCollection } from "./types";
+import AdminRootUserSeeder from "./seeders/admin-root-user.seeder";
 
 dotenv.config();
 
 const prisma = new PrismaClient();
+const seeders: PrismaDatabaseSeederCollection = [
+    AdminRootUserSeeder
+];
 
 async function main() {
-    const adminEmail = process.env.ADMIN_ROOT_EMAIL;
-    const adminPassword = process.env.ADMIN_ROOT_PASSWORD;
+    console.log("🌱 Starting the database seeding...");
 
-    if (!adminEmail || !adminPassword) {
-        console.error("`ADMIN_EMAIL` e `ADMIN_PASSWORD` precisam estar no `.env`");
-        process.exit(1);
-    }
+    try {
+        await Promise.all(seeders.map((seeder) => seeder(prisma)));
 
-    const adminExists = await prisma.user.findUnique({
-        where: { email: adminEmail },
-    });
-
-    if (!adminExists) {
-    const hashedPassword = await bcrypt.hash(adminPassword, 10);
-
-    await prisma.user.create({
-        data: {
-            name: process.env.ADMIN_ROOT_NAME || 'Admin',
-            email: adminEmail,
-            password: hashedPassword,
-            role: "ADMIN",
-        },
-    });
-
-        console.log("✅ Usuário admin criado com sucesso!");
-    } else {
-        console.log("ℹ️  Usuário admin já existe.");
+        console.log("✅ Seeding completed successfully!");
+    } catch (error) {
+        console.error("❌ Seeding failed:", error);
+    } finally {
+        await prisma.$disconnect();
     }
 }
 
-main()
-    .catch((e) => {
-        console.error(e);
-        process.exit(1);
-    })
-    .finally(async () => {
-        await prisma.$disconnect();
-    });
+main();
