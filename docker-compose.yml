@@ -1,0 +1,20 @@
+services:
+  pantore_db:
+    image: postgres:14
+    container_name: pantore_db_postgres
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_DATABASE}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - laravel_network
+
+volumes:
+  pgdata:
+
+networks:
+  laravel_network:

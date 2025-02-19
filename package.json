@@ -6,7 +6,13 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+
+    "prisma:bootstrap": "npm run prisma:setup && npm run prisma:seed",
+    "prisma:setup": "npx prisma generate && npx prisma migrate deploy",
+    "prisma:migration": "npx prisma migrate dev",
+    "prisma:seed": "npx prisma db seed",
+    "prisma:studio": "npx prisma studio"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
