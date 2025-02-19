@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "npm run prisma:bootstrap && next build",
+    "build": "npm run prisma:bootstrap && npx jest && next build",
     "start": "next start",
     "lint": "next lint",
+
+    "test": "npx jest",
 
     "prisma:bootstrap": "npm run prisma:setup && npm run prisma:seed",
     "prisma:setup": "npx prisma generate && npx prisma migrate deploy",
