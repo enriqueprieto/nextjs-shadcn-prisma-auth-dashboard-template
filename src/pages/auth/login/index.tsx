@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
 
 export default function LoginPage() {
   const[isLoading, setIsLoading] = useState(false);
@@ -39,61 +41,75 @@ export default function LoginPage() {
   });
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <form 
-        onSubmit={formik.handleSubmit} 
-        className="bg-white p-6 rounded-lg shadow-lg w-96"
-      >
-        <fieldset>
-          <legend className="text-xl font-bold mb-4">Welcome to Pantore dashboard</legend>
+    <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
+      <div className="flex w-full max-w-sm flex-col gap-6">
+        <a href="#" className="text-3xl flex items-center gap-2 self-center font-bold">
+          Pantore.dev
+        </a>
+        <div className="flex flex-col gap-6">
+          <Card>
+            <CardHeader className="text-center">
+              <CardTitle className="text-xl">Welcome back</CardTitle>
+              <CardDescription>
+                Login with your credentials
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={formik.handleSubmit} >
+                <div className="grid gap-6">
+                  <div className="grid gap-6">
+                    <div className="grid gap-2">
+                      <Label htmlFor="email">Email</Label>
+                      <Input 
+                        name="email"
+                        type="email" 
+                        placeholder="Email" 
+                        value={formik.values.email} 
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        className={[
+                          formik.errors?.email ? 'border-red-500': ''
+                        ].join(' ')}
+                        required 
+                      />
 
-          <div>
-            <Input 
-              name="email"
-              type="email" 
-              placeholder="Email" 
-              value={formik.values.email} 
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              className={[
-                formik.errors?.email ? 'border-red-500': ''
-              ].join(' ')}
-              required 
-            />
+                      {formik.errors.email && (
+                        <span className='text-red-500'>{formik.errors.email}</span>
+                      )}
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="password">Password</Label>
+                      <Input  
+                        type="password" 
+                        name="password"
+                        placeholder="Password" 
+                        value={formik.values.password} 
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} 
+                        required 
+                        className={[
+                          formik.errors?.password ? 'border-red-500': ''
+                        ].join(' ')}
+                      />
 
-            {formik.errors.email && (
-              <span className='text-red-500'>{formik.errors.email}</span>
-            )}
-          </div>
-
-          <div className="mt-4">
-            <Input  
-              type="password" 
-              name="password"
-              placeholder="Password" 
-              value={formik.values.password} 
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur} 
-              required 
-              className={[
-                formik.errors?.password ? 'border-red-500': ''
-              ].join(' ')}
-            />
-
-            {formik.errors.password && (
-              <span className='text-red-500'>{formik.errors.password}</span>
-            )}
-          </div>
-
-          <Button 
-            type="submit" 
-            className="mt-4 w-full"
-            disabled={isLoading || !formik.isValid}
-          >
-            { isLoading ? 'Loading...' : 'Log in' }
-          </Button>
-        </fieldset>
-      </form>
+                      {formik.errors.password && (
+                        <span className='text-red-500'>{formik.errors.password}</span>
+                      )}
+                    </div>
+                    <Button 
+                      type="submit" 
+                      className="w-full"
+                      disabled={isLoading || !formik.isValid}
+                    >
+                      { isLoading ? 'Loading...' : 'Log in' }
+                    </Button>
+                  </div>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }
