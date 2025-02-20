@@ -1,9 +1,8 @@
 import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 
-const prisma = new PrismaClient();
+import db from "@/lib/db";
 
 export const authOptions: AuthOptions = {
     providers: [
@@ -18,7 +17,7 @@ export const authOptions: AuthOptions = {
                 throw new Error("Email e senha são obrigatórios.");
                 }
 
-                const user = await prisma.user.findUnique({ where: { email: credentials.email } });
+                const user = await db.user.findUnique({ where: { email: credentials.email } });
 
                 if (!user) {
                 throw new Error("Usuário não encontrado.");
