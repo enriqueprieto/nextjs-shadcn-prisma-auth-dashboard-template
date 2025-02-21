@@ -1,5 +1,6 @@
 import { AppSidebar } from "@/components/appsidebar";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { Toaster } from "@/components/ui/toaster";
 import { ReactNode } from "react";
 
 interface LayoutProps {
@@ -17,6 +18,8 @@ const DashboardLayout = ({children}: LayoutProps) => {
                 <main className="px-4 py-2">
                     {children}
                 </main>
+
+                <Toaster />
             </SidebarInset>
         </SidebarProvider>
     );
