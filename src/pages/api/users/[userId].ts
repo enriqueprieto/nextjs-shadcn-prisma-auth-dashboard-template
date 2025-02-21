@@ -47,11 +47,7 @@ async function handleDelete(req: NextApiRequest, res: NextApiResponse, userId: s
     try {
         const session = await getServerSession(req, res, authOptions);
 
-        const { id: sessionUserId, role: sessionUserRole } = session?.user as { id: string, role: string };
-
-        if (sessionUserRole !== "ADMIN") {
-            return res.status(403).json({ error: "You do not have permission to delete users" });
-        }
+        const { id: sessionUserId } = session?.user as { id: string};
 
         if (sessionUserId === userId) {
             return res.status(400).json({ error: "You cannot delete your own account" });
