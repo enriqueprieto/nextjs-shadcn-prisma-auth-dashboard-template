@@ -5,8 +5,6 @@
 ## Table of Contents
 
 - [Features](#features)
-- [API Features](#api-features)
-- [Middleware](#middleware)
 - [Technologies](#technologies)
 - [Environment Setup](#environment-setup)
 - [Testing](#testing)
@@ -30,26 +28,19 @@
   - Filter forms with validation using Formik and Yup.
   - Popover-based filters that close upon form submission.
 
-## API Features
+- **API Features**
+    - **User Management**
+        - **`GET /api/users`** → Returns a paginated list of users with filtering options (`name`, `email`, `role`).
+        - **`POST /api/users/create`** → Creates a new user with a hashed password.
+        - **`GET /api/users/:userId`** → Retrieves details of a specific user.
+        - **`PUT /api/users/:userId`** → Updates user details.
+        - **`DELETE /api/users/:userId`** → Deletes a user (cannot delete self).
 
-The application provides RESTful API endpoints for managing users. All routes are protected and require authentication.
+    - **Authentication API**
+        - **`POST /api/auth/login`** → Logs in a user and returns a session.
+        - **`POST /api/auth/logout`** → Logs out the user.
 
-### **User Management**
-- **`GET /api/users`** → Returns a paginated list of users with filtering options (`name`, `email`, `role`).
-- **`POST /api/users`** → Creates a new user with a hashed password.
-- **`GET /api/users/:userId`** → Retrieves details of a specific user.
-- **`PUT /api/users/:userId`** → Updates user details.
-- **`DELETE /api/users/:userId`** → Deletes a user (cannot delete self).
-
-### **Authentication API**
-- **`POST /api/auth/login`** → Logs in a user and returns a session.
-- **`POST /api/auth/logout`** → Logs out the user.
-
-## Middleware
-
-The application uses middleware to secure routes and enforce access control.
-
-- **`middleware.ts`**:
+- **Middleware**
   - Protects all `/dashboard` routes using `withAuth`.
   - Restricts API routes by returning a **401 Unauthorized** response instead of a redirect.
   - Checks user roles and permissions dynamically.
@@ -91,6 +82,14 @@ You can also use `yarn install`.
 ```bash
 cp .env.example .env
 ```
+
+4. **Setup NextAuth Secret token**
+
+```bash
+npm run next-auth:secret
+```
+
+This command will generate a new `NEXTAUTH_SECRET` token and update your `.env`.
 
 4. **Run `docker-compose` command**
 

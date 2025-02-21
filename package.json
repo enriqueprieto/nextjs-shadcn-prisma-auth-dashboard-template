@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "npx jest",
+    "next-auth:secret": "node scripts/next-auth-secret.js",
     "prisma:bootstrap": "npm run prisma:setup && npm run prisma:seed",
     "prisma:setup": "npx prisma generate && npx prisma migrate deploy",
     "prisma:migration": "npx prisma migrate dev",
