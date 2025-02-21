@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { LoaderCircle } from "lucide-react";
+import { Filter, LoaderCircle } from "lucide-react";
 
 import DashboardLayout from "@/layouts/dashboard";
 
@@ -21,6 +21,7 @@ import {
     AlertDialogCancel, AlertDialogContent, AlertDialogDescription, 
     AlertDialogFooter, AlertDialogHeader 
 } from "@/components/ui/alert-dialog";
+import { UserFilter } from "@/components/users/filter";
 
 
 
@@ -30,12 +31,42 @@ const UsersPage = () => {
     const [openUserFormDialog, setOpenUserFormDialog] = useState(false);
     const [userFormLoading, setUserFormLoading] = useState(false);
 
+    const [filterValues, setFilterValues] = useState<any>({
+        email: null,
+        name: null,
+        role: null
+    });
     const [loadingUserDelete, setLoadingUserDelete] = useState(false);
     const [openUserDeleteDialog, setOpenUserDeleteDialog] = useState(false);
 
     const { toast } = useToast();
     const [loading, setLoading] = useState(true);
 
+    const fetchUsers = async (params: any = null) => {
+        try {
+            const filteredParams = Object.fromEntries(
+                Object.entries(params || {}).filter(([_, value]) => value != null && value !== "")
+            ) as any;    
+            const queryString = new URLSearchParams(filteredParams || {}).toString();
+            const url = `/api/users${queryString ? `?${queryString}` : ""}`;
+            const res = await fetch(url);
+            if (!res.ok) {
+                throw new Error("Failed to fetch users");
+            }
+            const responseData = await res.json() as UserModel[] || [];
+            
+            setFilterValues(params);
+            setData(responseData.map(item => item as ColumnDef<UserModel>));
+        } catch (err: any) {
+            toast({
+                title: "Something went wrong",
+                description: err.message,
+                variant: 'destructive'
+            });
+        } finally {
+            setLoading(false);
+        }
+    }
     const getColumns = () => {
         return [
             { 
@@ -181,26 +212,6 @@ const UsersPage = () => {
         setUserFormLoading(false);
     }
 
-    async function fetchUsers() {
-    try {
-        const res = await fetch("/api/users");
-        if (!res.ok) {
-            throw new Error("Failed to fetch users");
-        }
-        const responseData = await res.json() as UserModel[] || [];
-
-        setData(responseData.map(item => item as ColumnDef<UserModel>));
-    } catch (err: any) {
-        toast({
-            title: "Something went wrong",
-            description: err.message,
-            variant: 'destructive'
-        });
-    } finally {
-        setLoading(false);
-    }
-    }
-
     useEffect(() => {
         fetchUsers();
     }, []);
@@ -223,6 +234,15 @@ const UsersPage = () => {
 
                 {!loading && (
                     <div className="mt-4">
+                        <div className="flex justify-between flex-row-reverse my-4">
+                            <UserFilter 
+                                onFilterSubmit={fetchUsers}
+                                filterProps={{
+                                    initialValues: filterValues
+                                }}
+                            />
+                        </div>
+
                         <DataTable 
                             data={data} 
                             columns={getColumns()} 
