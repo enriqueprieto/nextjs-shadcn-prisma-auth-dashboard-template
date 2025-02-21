@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { Filter, LoaderCircle } from "lucide-react";
+import { Filter, LoaderCircle, RefreshCw } from "lucide-react";
 
 import DashboardLayout from "@/layouts/dashboard";
 
@@ -122,7 +122,7 @@ const UsersPage = () => {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.error || "Error deleting user");
+                throw errorData.error || "Error deleting user";
             }
 
 
@@ -140,9 +140,10 @@ const UsersPage = () => {
             console.error("Error deleting user:", error);
             toast({
                 title: 'Something went wrong',
-                description: error.message,
+                description: error,
                 className: "bg-red-500 border-red-700",
-                variant: 'destructive'
+                variant: 'destructive',
+                duration: 2000
             });
         }
 
@@ -234,7 +235,18 @@ const UsersPage = () => {
 
                 {!loading && (
                     <div className="mt-4">
-                        <div className="flex justify-between flex-row-reverse my-4">
+                        <div className="flex justify-end my-4">
+                            <Button 
+                                type="button" 
+                                onClick={fetchUsers.bind(this, filterValues)} 
+                                size="sm" 
+                                variant="outline"
+                                className="mr-2"
+                            >
+                                <RefreshCw />
+
+                                Refresh
+                            </Button>
                             <UserFilter 
                                 onFilterSubmit={fetchUsers}
                                 filterProps={{

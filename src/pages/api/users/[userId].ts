@@ -2,6 +2,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcrypt";
 
 import db from "@/lib/db";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]";
 
 async function handleGet(req: NextApiRequest, res: NextApiResponse, userId: string) {
     try {
@@ -43,6 +45,18 @@ async function handlePut(req: NextApiRequest, res: NextApiResponse, userId: stri
 
 async function handleDelete(req: NextApiRequest, res: NextApiResponse, userId: string) {
     try {
+        const session = await getServerSession(req, res, authOptions);
+
+        const { id: sessionUserId, role: sessionUserRole } = session?.user as { id: string, role: string };
+
+        if (sessionUserRole !== "ADMIN") {
+            return res.status(403).json({ error: "You do not have permission to delete users" });
+        }
+
+        if (sessionUserId === userId) {
+            return res.status(400).json({ error: "You cannot delete your own account" });
+        }
+
         const deletedUser = await db.user.delete({
             where: { id: String(userId) },
         });
