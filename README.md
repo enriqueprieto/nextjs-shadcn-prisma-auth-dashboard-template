@@ -1,13 +1,16 @@
 # Pantore Dev
 
-The **Pantore Dev** is a full-stack application built with Next.js that integrates both backend and frontend in a single repository for a technical challenge by [Pantore Pay](https://pantorepay.com.br). The technical challenge involves creating an application for managing users, show up my tech skills and join in development team of company. If you want to know more about this challenge follow the test description [link](https://github.com/Pantore/developer-test/blob/main/BACKEND.md).
+**Pantore Dev** is a full-stack application built with Next.js that integrates both the backend and frontend in a single repository. It was developed as part of a technical challenge for [Pantore Pay](https://pantorepay.com.br). The challenge involves creating a user management application to showcase my technical skills and join the company's development team. If you want to learn more about this challenge, follow the test description [here](https://github.com/Pantore/developer-test/blob/main/BACKEND.md).
 
 ## Table of Contents
 
 - [Features](#features)
+- [API Features](#api-features)
+- [Middleware](#middleware)
 - [Technologies](#technologies)
 - [Environment Setup](#environment-setup)
 - [Testing](#testing)
+- [Demo](#demo)
 
 ## Features
 
@@ -27,14 +30,38 @@ The **Pantore Dev** is a full-stack application built with Next.js that integrat
   - Filter forms with validation using Formik and Yup.
   - Popover-based filters that close upon form submission.
 
+## API Features
+
+The application provides RESTful API endpoints for managing users. All routes are protected and require authentication.
+
+### **User Management**
+- **`GET /api/users`** → Returns a paginated list of users with filtering options (`name`, `email`, `role`).
+- **`POST /api/users`** → Creates a new user with a hashed password.
+- **`GET /api/users/:userId`** → Retrieves details of a specific user.
+- **`PUT /api/users/:userId`** → Updates user details.
+- **`DELETE /api/users/:userId`** → Deletes a user (cannot delete self).
+
+### **Authentication API**
+- **`POST /api/auth/login`** → Logs in a user and returns a session.
+- **`POST /api/auth/logout`** → Logs out the user.
+
+## Middleware
+
+The application uses middleware to secure routes and enforce access control.
+
+- **`middleware.ts`**:
+  - Protects all `/dashboard` routes using `withAuth`.
+  - Restricts API routes by returning a **401 Unauthorized** response instead of a redirect.
+  - Checks user roles and permissions dynamically.
+
 ## Technologies
 
 - **Next.js:** React framework for server-side rendering (SSR) and API routes.
 - **TypeScript:** Provides static type checking.
 - **NextAuth.js:** Authentication with JWT support.
 - **Prisma:** ORM for PostgreSQL.
-- **Formik:** Used to create pettry interactions with forms.
-- **Yup:** Used to create validation schemas.
+- **Formik:** Used for handling form interactions.
+- **Yup:** Used for form validation schemas.
 - **PostgreSQL:** Relational database.
 - **Tailwind CSS & shadcn/ui:** Component library and styling framework.
 - **Jest & React Testing Library:** For unit and integration testing.
@@ -42,20 +69,22 @@ The **Pantore Dev** is a full-stack application built with Next.js that integrat
 
 ## Environment Setup
 
+> Warning: To run this application in your environment system, take sure you have already `Docker Compose` installed in your system. Let's check out next steps.
+
 1. **Clone the repository:**
 
 ```bash
-   git clone https://github.com/your-username/your-repository.git
-   cd your-repository
+   git clone git@github.com:enriqueprieto/pantore-backend-dev.git
+   cd pantore-backend-dev
 ```
 
 2. **Install dependencies:**
 
-```
+```bash
 npm install
 ```
 
-You can use `yarn install` as well.
+You can also use `yarn install`.
 
 3. **Create a .env file in the project root with the following variables:**
 
@@ -69,7 +98,7 @@ cp .env.example .env
 docker-compose up -d
 ```
 
-This command will up our Postgre database with `.env` values.
+This command will start a PostgreSQL database using the values from the `.env` file.
 
 5. **Run dabatase setup**
 
@@ -77,7 +106,7 @@ This command will up our Postgre database with `.env` values.
 npm run prisma:bootstrap
 ```
 
-This command will connect, setup, migrate and seed our database.
+This command will connect to the database, set it up, run migrations, and seed initial data.
 
 
 6. **Run application**
@@ -86,6 +115,9 @@ This command will connect, setup, migrate and seed our database.
 npm run dev
 ```
 
-Now the url `http://localhost:3000` is available to access.
+The application will be available at [`http://localhost:3000`](http://localhost:3000).
 
+## Demo
+
+You can preview this project on live [here](https://pantore-backend-dev.vercel.app/).
 
