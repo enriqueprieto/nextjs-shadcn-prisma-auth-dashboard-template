@@ -1,6 +1,6 @@
 # Welcome
 
-This repository is a dashboard template with features thought for developer experience.
+This repository is a dashboard template with features that can help developers from zero to deploy.
 
 ## Table of Contents
 
@@ -8,7 +8,7 @@ This repository is a dashboard template with features thought for developer expe
 - [Technologies](#technologies)
 - [Environment Setup](#environment-setup)
 - [Testing](#testing)
-- [Demo](#demo)
+- [Roadmap](#roadmap)
 
 ## Features
 
@@ -116,7 +116,21 @@ npm run dev
 
 The application will be available at [`http://localhost:3000`](http://localhost:3000).
 
-## Demo
+## Roadmap
 
-You can preview this project on live [here](https://pantore-backend-dev.vercel.app/).
+In this section you'll find all task I had mapped for while, all of the task is about the future of this template.
+
+- [] i18n
+- [] Setup `husky` for git commits handles.
+  - [] Run `eslint`
+  - [] Run unit tests with coverage
+- [] Tests
+  - [] Unit tests
+    - [] Create tests for `User` resources
+    - [] Create tests for `Authentication` feature.
+  - [] End to End
+    - [] Setup `e2e` tests using `Cypress`
+    - [] Create tests for `Authentication` feature.
+      - [] Create a config to setup `authentication` state on sections.
+  - [] Create an tests for `User` resrouce.
 
