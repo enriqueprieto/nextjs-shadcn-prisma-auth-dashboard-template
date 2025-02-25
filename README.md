@@ -67,8 +67,8 @@ This repository provides a dashboard template designed to assist developers from
 1. **Clone the repository:**
 
 ```bash
-   git clone git@github.com:enriqueprieto/pantore-backend-dev.git
-   cd pantore-backend-dev
+   git clone git@github.com:enriqueprieto/nextjs-shadcn-prisma-auth-dashboard-template.git
+   cd nextjs-shadcn-prisma-auth-dashboard-template
 ```
 
 2. **Install dependencies:**
