@@ -116,6 +116,13 @@ npm run dev
 
 The application will be available at [`http://localhost:3000`](http://localhost:3000).
 
+## Contributing
+
+Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## License
+This project is licensed under the MIT License, see the [LICENSE.md](./LICENSE.md) file for details
+
 ## Roadmap
 
 In this section you'll find all task I had mapped for while, all of the task is about the future of this template.
@@ -132,5 +139,5 @@ In this section you'll find all task I had mapped for while, all of the task is 
     - [ ] Setup `e2e` tests using `Cypress`
     - [ ] Create tests for `Authentication` feature.
       - [ ] Create a config to setup `authentication` state on sections.
-  - [ s] Create an tests for `User` resrouce.
+  - [ ] Create an tests for `User` resrouce.
 
