@@ -120,17 +120,17 @@ The application will be available at [`http://localhost:3000`](http://localhost:
 
 In this section you'll find all task I had mapped for while, all of the task is about the future of this template.
 
-- [] i18n
-- [] Setup `husky` for git commits handles.
-  - [] Run `eslint`
-  - [] Run unit tests with coverage
-- [] Tests
-  - [] Unit tests
-    - [] Create tests for `User` resources
-    - [] Create tests for `Authentication` feature.
-  - [] End to End
-    - [] Setup `e2e` tests using `Cypress`
-    - [] Create tests for `Authentication` feature.
-      - [] Create a config to setup `authentication` state on sections.
-  - [] Create an tests for `User` resrouce.
+- [ ] i18n
+- [ ] Setup `husky` for git commits handles.
+  - [ ] Run `eslint`
+  - [ ] Run unit tests with coverage
+- [ ] Tests
+  - [ ] Unit tests
+    - [ ] Create tests for `User` resources
+    - [ ] Create tests for `Authentication` feature.
+  - [ ] End to End
+    - [ ] Setup `e2e` tests using `Cypress`
+    - [ ] Create tests for `Authentication` feature.
+      - [ ] Create a config to setup `authentication` state on sections.
+  - [ s] Create an tests for `User` resrouce.
 
