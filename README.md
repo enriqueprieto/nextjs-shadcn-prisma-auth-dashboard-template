@@ -1,6 +1,6 @@
-# Pantore Dev
+# Welcome
 
-**Pantore Dev** is a full-stack application built with Next.js that integrates both the backend and frontend in a single repository. It was developed as part of a technical challenge for [Pantore Pay](https://pantorepay.com.br). The challenge involves creating a user management application to showcase my technical skills and join the company's development team. If you want to learn more about this challenge, follow the test description [here](https://github.com/Pantore/developer-test/blob/main/BACKEND.md).
+This repository is a dashboard template with features thought for developer experience.
 
 ## Table of Contents
 
