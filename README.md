@@ -1,6 +1,6 @@
 # Welcome
 
-This repository is a dashboard template with features that can help developers from zero to deploy.
+This repository provides a dashboard template designed to assist developers from initial setup to deployment.
 
 ## Table of Contents
 
@@ -8,6 +8,8 @@ This repository is a dashboard template with features that can help developers f
 - [Technologies](#technologies)
 - [Environment Setup](#environment-setup)
 - [Testing](#testing)
+- [Contributing](#contributing)
+- [License](#license)
 - [Roadmap](#roadmap)
 
 ## Features
