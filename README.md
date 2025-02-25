@@ -133,6 +133,8 @@ In this section you'll find all task I had mapped for while, all of the task is 
 - [ ] Setup `husky` for git commits handles.
   - [ ] Run `eslint`
   - [ ] Run unit tests with coverage
+- [ ] Command-line
+  - [ ] Generate new resources feature
 - [ ] Tests
   - [ ] Unit tests
     - [ ] Create tests for `User` resources
