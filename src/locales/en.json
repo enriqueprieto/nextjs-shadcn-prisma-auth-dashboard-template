@@ -8,17 +8,37 @@
         
         "refresh": "Refresh",
         "loading": "Loading...",
+        "saving_label": "Saving...",
+        "creating_label": "Creating...",
         "name_label": "Name",
         "email_label": "Email",
         "role_label": "Role",
         "select_placeholder": "Selection an option",
         "delete_label": "Delete",
-
+        "password_label": "Password",
+        "cancel_label": "Cancel",
+        
         "filter_reset_label": "Reset filter",
         "filter_label": "Filter",
-
+        
         "action_dropdown_label": "Actions",
-        "action_dropdown_trigger_label": "Open menu"
+        "action_dropdown_trigger_label": "Open menu",
+        
+        "alert_cancel_button_label": "No, thanks",
+        "alert_confirm_button_label": "Continue",
+
+        "dialog_save_button_label": "Save changes",
+
+        "formik_errors": {
+            "This field is required": "This field is required"
+        }
+    },
+
+    "formik": {
+        "errors": {
+            "required": "This field is required",
+            "email": "Set a valid email"
+        }
     },
     
     "Home": {
@@ -44,7 +64,20 @@
             "role_admin_label": "Admin",
             "role_client_label": "Client",
 
-            "filter_submit_label": "Search user"
+            "filter_submit_label": "Search user",
+
+            "alert_delete_title": "Are you absolutely sure?",
+            "alert_delete_description": "This action cannot be undone. This will permanently delete user data from our servers.",
+
+            "dialog_edit_title": "Edit user",
+            "dialog_create_title": "Create user"
         }
+    },
+
+    "Account": {
+        "dropdown_title": "My Account",
+
+        "sign_out_button_label": "Sign out",
+        "sign_in_button_label": "Login"
     }
 }

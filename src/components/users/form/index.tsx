@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { cn } from "@/lib/utils"
 
 import { UserModel } from "@/models/user/types"
+import { useTranslations } from "next-intl"
 
 interface UserFormProps {
     [key: string]: any;
@@ -21,6 +22,7 @@ export const UserForm = ({
     user, 
     onSubmit = () => {} 
 }: UserFormProps) => {
+    const t = useTranslations();
     let initialValues: any = {
         id: 'create',
         name: '',
@@ -35,9 +37,9 @@ export const UserForm = ({
     const formik = useFormik({
         validateOnMount: true,
         validationSchema: Yup.object({
-            name: Yup.string().required('This field is required'),
-            email: Yup.string().email().required('This field is required.'),
-            role: Yup.string().required('This field is required.')
+            name: Yup.string().required(t('formik.errors.required')),
+            email: Yup.string().email(t('formik.errors.email')).required(t('formik.errors.required')),
+            role: Yup.string().required(t('formik.errors.required'))
         }),
         initialValues,
         onSubmit: onSubmit
@@ -49,11 +51,11 @@ export const UserForm = ({
             className={cn("grid items-start gap-4", className)}
         >
             <div className="grid gap-2">
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name">{t('common.name_label')}</Label>
                 <Input  
                     type="text" 
                     name="name"
-                    placeholder="Name" 
+                    placeholder={t('common.name_label')}
                     value={formik.values.name} 
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur} 
@@ -68,11 +70,11 @@ export const UserForm = ({
                 )}
             </div>
             <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t('common.email_label')}</Label>
                 <Input 
                     name="email"
                     type="email" 
-                    placeholder="Email" 
+                    placeholder={t('common.email_label')}
                     value={formik.values.email} 
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -89,11 +91,11 @@ export const UserForm = ({
 
             {formik.values.id === 'create' && (
                 <div className="grid gap-2">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">{t('common.password_label')}</Label>
                     <Input 
                         name="password"
                         type="password" 
-                        placeholder="Password" 
+                        placeholder={t('common.password_label')}
                         value={formik.values.password} 
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -111,7 +113,7 @@ export const UserForm = ({
             )}
 
             <div className="grid gap-2">
-                <Label htmlFor="role">Role</Label>
+                <Label htmlFor="role">{t('common.role_label')}</Label>
                 <Select value={formik.values.role} onValueChange={(value: string) => formik.setFieldValue('role', value)}>
                     <SelectTrigger 
                         id="role"
@@ -120,11 +122,11 @@ export const UserForm = ({
                             formik.errors?.role ? 'border-red-500': ''
                         ].join(' ')}
                     >
-                        <SelectValue placeholder="Selection an option" />
+                        <SelectValue placeholder={t('common.select_placeholder')} />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="ADMIN">Admin</SelectItem>
-                        <SelectItem value="CLIENT">Client</SelectItem>
+                        <SelectItem value="ADMIN">{t('Dashboard.User.role_admin_label')}</SelectItem>
+                        <SelectItem value="CLIENT">{t('Dashboard.User.role_client_label')}</SelectItem>
                     </SelectContent>
                 </Select>
 

@@ -6,6 +6,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Home, UsersRound } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface ComponentProps {
     children?: ReactNode;
@@ -23,6 +24,7 @@ function getInitials(name: string): string {
   }
 export const AppSidebar = ({ children }: ComponentProps) => {
     const router = useRouter();
+    const t = useTranslations();
     const { data } = useSession();
 
     const handleLogout = async () => {
@@ -46,9 +48,9 @@ export const AppSidebar = ({ children }: ComponentProps) => {
                             </div>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
-                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                            <DropdownMenuLabel>{t('Account.dropdown_title')}</DropdownMenuLabel>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem onClick={handleLogout}>Sign out</DropdownMenuItem>
+                            <DropdownMenuItem onClick={handleLogout}>{t('Account.sign_out_button_label')}</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 )}
@@ -68,7 +70,7 @@ export const AppSidebar = ({ children }: ComponentProps) => {
                             <SidebarMenuButton asChild>
                                 <Link href="/dashboard/users" className="flex align-items-center text-sm">
                                     <UsersRound />
-                                    <span className="ml-2 leading-[24px]">Users</span>
+                                    <span className="ml-2 leading-[24px]">{t('Dashboard.User.title')}</span>
                                 </Link>
                             </SidebarMenuButton>
                         </SidebarMenuItem>

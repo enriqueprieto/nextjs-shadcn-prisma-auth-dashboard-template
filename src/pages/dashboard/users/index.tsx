@@ -24,6 +24,7 @@ import {
 import { UserFilter } from "@/components/users/filter";
 import { getStaticPropsWithIntl } from "@/lib/getStaticPropsWithIntl";
 import { useTranslations } from "next-intl";
+import Head from "next/head";
 
 
 export const getStaticProps = getStaticPropsWithIntl();
@@ -231,6 +232,10 @@ const UsersPage = () => {
 
     return (
         <DashboardLayout>
+            <Head>
+                <title>{t('Dashboard.User.title')}</title>
+            </Head>
+            
             <div>
                 <div className="flex justify-between items-center">
                     <h2 className="text-5xl font-medium">{t('Dashboard.User.title')}</h2>
@@ -258,7 +263,7 @@ const UsersPage = () => {
 
                                 {t('common.refresh')}
                             </Button>
-                            
+
                             <UserFilter 
                                 onFilterSubmit={fetchUsers}
                                 filterProps={{
@@ -283,7 +288,9 @@ const UsersPage = () => {
                     >
                         <DialogContent className="bg-white">
                             <DialogHeader className="text-left">
-                                <DialogTitle>{userSelected ? 'Edit User' : 'Create User'}</DialogTitle>
+                                <DialogTitle>
+                                    {t(userSelected ? 'Dashboard.User.dialog_edit_title' : 'Dashboard.User.dialog_create_title')}
+                                </DialogTitle>
                             </DialogHeader>
 
                             <UserForm 
@@ -294,7 +301,7 @@ const UsersPage = () => {
 
                             <DialogFooter className="pt-2">
                                 <DialogClose asChild>
-                                    <Button variant="outline">Cancel</Button>
+                                    <Button variant="outline">{t('common.cancel_label')}</Button>
                                 </DialogClose>
 
                                 <Button 
@@ -306,11 +313,11 @@ const UsersPage = () => {
                                         <LoaderCircle className="mr-2"/>
                                     )}
 
-                                    {
+                                    {t(
                                         userSelected
-                                            ? userFormLoading ? 'Saving...' : 'Save changes'
-                                            : userFormLoading ? 'Creating...': "Create user"
-                                    }
+                                            ? userFormLoading ? 'common.saving_label' : 'common.dialog_save_button_label'
+                                            : userFormLoading ? 'common.creating_label': "Dashboard.User.dialog_create_title"
+                                    )}
                                 </Button>
                             </DialogFooter>
                         </DialogContent>
@@ -322,13 +329,18 @@ const UsersPage = () => {
                     >
                         <AlertDialogContent className="bg-white">
                             <AlertDialogHeader>
-                                <AlertDialogTitle className="text-red-500 font-bold">Are you absolutely sure?</AlertDialogTitle>
+                                <AlertDialogTitle className="text-red-500 font-bold">
+                                    {t('Dashboard.User.alert_delete_title')}
+                                </AlertDialogTitle>
+
                                 <AlertDialogDescription>
-                                    This action cannot be undone. This will permanently delete user data from our servers.
+                                    {t('Dashboard.User.alert_delete_description')}
                                 </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
-                                <AlertDialogCancel>No, thanks</AlertDialogCancel>
+                                <AlertDialogCancel>
+                                    {t('common.alert_cancel_button_label')}
+                                </AlertDialogCancel>
 
                                 <AlertDialogAction 
                                     className="bg-red-500" 
@@ -339,7 +351,7 @@ const UsersPage = () => {
                                         <LoaderCircle className="mr-2"/>
                                     )}
 
-                                    Continue
+                                    {t('common.alert_confirm_button_label')}
                                 </AlertDialogAction>
                             </AlertDialogFooter>
                         </AlertDialogContent>
