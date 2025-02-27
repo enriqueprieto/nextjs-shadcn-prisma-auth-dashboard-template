@@ -1,8 +1,10 @@
-import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Github } from "lucide-react";
+import { useTranslations } from "next-intl";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { getStaticPropsWithIntl } from "@/lib/getStaticPropsWithIntl";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,14 +16,19 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const getStaticProps = getStaticPropsWithIntl();
+
 export default function Home() {
+  const t = useTranslations();
   return (
     <div
       className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
     >
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <h1 className="text-5xl font-bold">Pantore Dev</h1>
-        <p>Welcome to <b>Pantore Dev</b>, a full-stack application built with Next.js that integrates both the backend and frontend into a single repository. It was developed as part of a technical challenge for <Link href="https://pantorepay.com.br">Pantore Pay</Link>. Feel free to check out the repository on <b>GitHub</b>.</p>
+        <h1 className="text-5xl font-bold">{t('Home.title')}</h1>
+        <p>{t('Home.description')}</p>
+
+        <LanguageSwitcher />
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <Button 
@@ -33,7 +40,7 @@ export default function Home() {
               href="/dashboard"
               target="_blank"
             >
-              Go to dashboard
+              {t('common.dashboard_button_label')}
             </Link>
           </Button>
 
@@ -49,7 +56,7 @@ export default function Home() {
             >
               <Github />
 
-              Go to repository
+              {t('common.github_button_label')}
             </Link>
           </Button>
         </div>

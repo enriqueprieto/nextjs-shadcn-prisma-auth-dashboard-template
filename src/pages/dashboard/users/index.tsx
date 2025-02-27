@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { Filter, LoaderCircle, RefreshCw } from "lucide-react";
+import { LoaderCircle, RefreshCw } from "lucide-react";
 
 import DashboardLayout from "@/layouts/dashboard";
 
@@ -22,10 +22,16 @@ import {
     AlertDialogFooter, AlertDialogHeader 
 } from "@/components/ui/alert-dialog";
 import { UserFilter } from "@/components/users/filter";
+import { getStaticPropsWithIntl } from "@/lib/getStaticPropsWithIntl";
+import { useTranslations } from "next-intl";
+import Head from "next/head";
 
 
+export const getStaticProps = getStaticPropsWithIntl();
 
 const UsersPage = () => {
+    const t = useTranslations();
+
     const [data, setData] = useState<ColumnDef<UserModel>[]>([]);
     const [userSelected, setUserSelected] = useState<UserModel | null>(null);
     const [openUserFormDialog, setOpenUserFormDialog] = useState(false);
@@ -51,7 +57,7 @@ const UsersPage = () => {
             const url = `/api/users${queryString ? `?${queryString}` : ""}`;
             const res = await fetch(url);
             if (!res.ok) {
-                throw new Error("Failed to fetch users");
+                throw new Error(t("Dashboard.User.message_error_fetch"));
             }
             const responseData = await res.json() as UserModel[] || [];
             
@@ -59,7 +65,7 @@ const UsersPage = () => {
             setData(responseData.map(item => item as ColumnDef<UserModel>));
         } catch (err: any) {
             toast({
-                title: "Something went wrong",
+                title: t("common.toast_title_error"),
                 description: err.message,
                 variant: 'destructive'
             });
@@ -70,11 +76,17 @@ const UsersPage = () => {
     const getColumns = () => {
         return [
             { 
-                header: "Name", 
+                header: t("common.name_label"), 
                 accessorKey: "name" 
             },
-            { header: "Email", accessorKey: "email" },
-            { header: "Role", accessorKey: "role" },
+            { 
+                header: t("common.email_label"), 
+                accessorKey: "email" 
+            },
+            { 
+                header: t("common.role_label"), 
+                accessorKey: "role" 
+            },
             { 
                 id: "actions",
                 cell: (props: any) => <UserTableActionsCell 
@@ -122,13 +134,13 @@ const UsersPage = () => {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw errorData.error || "Error deleting user";
+                throw errorData.error || t("Dashboard.User.message_error_delete");
             }
 
 
             toast({
-                title: 'Everything went ok!',
-                description: 'User delete success.',
+                title: t('common.toast_title_success'),
+                description: t('Dashboard.User.message_success_delete'),
                 className: "bg-green-500 border-green-700",
                 duration: 1500
             });
@@ -139,7 +151,7 @@ const UsersPage = () => {
         } catch (error: any) {
             console.error("Error deleting user:", error);
             toast({
-                title: 'Something went wrong',
+                title: t('common.toast_title_error'),
                 description: error,
                 className: "bg-red-500 border-red-700",
                 variant: 'destructive',
@@ -175,7 +187,7 @@ const UsersPage = () => {
             });
 
             if (!response.ok) {
-                throw new Error('Failed trying save the changes on server.');
+                throw new Error('Dashboard.User.message_error_save');
             }
             let users = [...data];
             const userValues = await response.json() as UserModel;
@@ -194,8 +206,8 @@ const UsersPage = () => {
 
             setData(users);
             toast({
-                title: 'Everything went ok!',
-                description: 'User save success.',
+                title: t("common.toast_title_success"),
+                description: t("Dasboard.User.message_success_save"),
                 className: "bg-green-500 border-green-700",
                 duration: 1500
             });
@@ -203,8 +215,8 @@ const UsersPage = () => {
             handleUserFormDilaogOpenChange(false);
         } catch (error: any) {
             toast({
-                title: 'Something went wrong',
-                description: error.message,
+                title: t('common.toast_title_error'),
+                description: t(error.message),
                 className: "bg-red-500 border-red-700",
                 variant: 'destructive'
             });
@@ -220,17 +232,21 @@ const UsersPage = () => {
 
     return (
         <DashboardLayout>
+            <Head>
+                <title>{t('Dashboard.User.title')}</title>
+            </Head>
+            
             <div>
                 <div className="flex justify-between items-center">
-                    <h2 className="text-5xl font-medium">Users</h2>
+                    <h2 className="text-5xl font-medium">{t('Dashboard.User.title')}</h2>
 
                     <Button type="button" onClick={handleCreateClick}>
-                        New User
+                        {t('Dashboard.User.button_label_create')}
                     </Button>
                 </div>
 
                 {loading && (
-                    <p>Loading...</p>
+                    <p>{t('common.loading')}</p>
                 )}
 
                 {!loading && (
@@ -245,8 +261,9 @@ const UsersPage = () => {
                             >
                                 <RefreshCw />
 
-                                Refresh
+                                {t('common.refresh')}
                             </Button>
+
                             <UserFilter 
                                 onFilterSubmit={fetchUsers}
                                 filterProps={{
@@ -271,7 +288,9 @@ const UsersPage = () => {
                     >
                         <DialogContent className="bg-white">
                             <DialogHeader className="text-left">
-                                <DialogTitle>{userSelected ? 'Edit User' : 'Create User'}</DialogTitle>
+                                <DialogTitle>
+                                    {t(userSelected ? 'Dashboard.User.dialog_edit_title' : 'Dashboard.User.dialog_create_title')}
+                                </DialogTitle>
                             </DialogHeader>
 
                             <UserForm 
@@ -282,7 +301,7 @@ const UsersPage = () => {
 
                             <DialogFooter className="pt-2">
                                 <DialogClose asChild>
-                                    <Button variant="outline">Cancel</Button>
+                                    <Button variant="outline">{t('common.cancel_label')}</Button>
                                 </DialogClose>
 
                                 <Button 
@@ -294,11 +313,11 @@ const UsersPage = () => {
                                         <LoaderCircle className="mr-2"/>
                                     )}
 
-                                    {
+                                    {t(
                                         userSelected
-                                            ? userFormLoading ? 'Saving...' : 'Save changes'
-                                            : userFormLoading ? 'Creating...': "Create user"
-                                    }
+                                            ? userFormLoading ? 'common.saving_label' : 'common.dialog_save_button_label'
+                                            : userFormLoading ? 'common.creating_label': "Dashboard.User.dialog_create_title"
+                                    )}
                                 </Button>
                             </DialogFooter>
                         </DialogContent>
@@ -310,13 +329,18 @@ const UsersPage = () => {
                     >
                         <AlertDialogContent className="bg-white">
                             <AlertDialogHeader>
-                                <AlertDialogTitle className="text-red-500 font-bold">Are you absolutely sure?</AlertDialogTitle>
+                                <AlertDialogTitle className="text-red-500 font-bold">
+                                    {t('Dashboard.User.alert_delete_title')}
+                                </AlertDialogTitle>
+
                                 <AlertDialogDescription>
-                                    This action cannot be undone. This will permanently delete user data from our servers.
+                                    {t('Dashboard.User.alert_delete_description')}
                                 </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
-                                <AlertDialogCancel>No, thanks</AlertDialogCancel>
+                                <AlertDialogCancel>
+                                    {t('common.alert_cancel_button_label')}
+                                </AlertDialogCancel>
 
                                 <AlertDialogAction 
                                     className="bg-red-500" 
@@ -327,7 +351,7 @@ const UsersPage = () => {
                                         <LoaderCircle className="mr-2"/>
                                     )}
 
-                                    Continue
+                                    {t('common.alert_confirm_button_label')}
                                 </AlertDialogAction>
                             </AlertDialogFooter>
                         </AlertDialogContent>
