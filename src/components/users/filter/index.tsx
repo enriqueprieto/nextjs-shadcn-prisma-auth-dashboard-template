@@ -5,6 +5,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useFormik } from "formik";
 import { Filter } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 export const UserFilterForm = (props: any = {}) => {
@@ -16,7 +17,8 @@ export const UserFilterForm = (props: any = {}) => {
             role: null
         }
     } = props;
-    
+    const t = useTranslations();
+
     const handleSubmit = (values: any) => {
         onSubmit(values);
     }
@@ -45,11 +47,11 @@ export const UserFilterForm = (props: any = {}) => {
             autoComplete="off"
         >
             <div className="grid gap-2">
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name">{t('common.name_label')}</Label>
                 <Input  
                     type="text" 
                     name="name"
-                    placeholder="Name" 
+                    placeholder={t('common.name_label')} 
                     value={formik.values.name || ''} 
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -60,11 +62,11 @@ export const UserFilterForm = (props: any = {}) => {
                 )}
             </div>
             <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t('common.email_label')}</Label>
                 <Input 
                     name="email"
                     type="text" 
-                    placeholder="Email" 
+                    placeholder={t('common.email_label')} 
                     autoComplete="off"
                     value={formik.values.email || ''} 
                     onChange={formik.handleChange}
@@ -73,7 +75,7 @@ export const UserFilterForm = (props: any = {}) => {
             </div>
 
             <div className="grid gap-2">
-                <Label htmlFor="role">Role</Label>
+                <Label htmlFor="role">{t('common.role_label')}</Label>
                 <Select 
                     value={formik.values.role || ''} 
                     onValueChange={(value: string) => formik.setFieldValue('role', value)}
@@ -81,20 +83,20 @@ export const UserFilterForm = (props: any = {}) => {
                     <SelectTrigger 
                         id="role"
                     >
-                        <SelectValue placeholder="Selection an option" />
+                        <SelectValue placeholder={t('common.select_placeholder')} />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="ADMIN">Admin</SelectItem>
-                        <SelectItem value="CLIENT">Client</SelectItem>
+                        <SelectItem value="ADMIN">{t('Dashboard.User.role_admin_label')}</SelectItem>
+                        <SelectItem value="CLIENT">{t('Dashboard.User.role_client_label')}</SelectItem>
                     </SelectContent>
                 </Select>
             </div>
 
             <Button type="submit" className="w-full">
-                Search user
+                {t('Dashboard.User.filter_submit_label')}
             </Button>
             <Button type="button" variant="ghost" className="w-full" onClick={handleClearFilter}>
-                Reset filter
+                {t('common.filter_reset_label')}
             </Button>
         </form>
     );
@@ -105,6 +107,7 @@ export const UserFilterPopover = (props: any = {}) => {
         onFilterSubmit = () => {},
         filterProps = {}
     } = props;
+    const t = useTranslations();
     const [openPopover, setOpenPopover] = useState(false);
     const handleFormSubmit = (values: any) => {
         setOpenPopover(false);
@@ -123,7 +126,7 @@ export const UserFilterPopover = (props: any = {}) => {
                 >
                     <Filter />
 
-                    Filter
+                    {t('common.filter_label')}
                 </Button>
             </PopoverTrigger>
             <PopoverContent>

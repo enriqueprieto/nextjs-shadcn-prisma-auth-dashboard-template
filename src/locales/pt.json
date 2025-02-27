@@ -1,7 +1,24 @@
 {
     "common": {
         "github_button_label": "Ir para o repositório",
-        "dashboard_button_label": "Ir para o dashboard"
+        "dashboard_button_label": "Ir para o dashboard",
+
+        "toast_title_error": "Algo de errado aconteceu",
+        "toast_title_success": "Tudo ocorreu bem!",
+        
+        "refresh": "Atualizar",
+        "loading": "Carregando...",
+        "name_label": "Nome",
+        "email_label": "Email",
+        "role_label": "Papel",
+        "select_placeholder": "Selecione uma opção",
+        "delete_label": "Excluir",
+
+        "filter_reset_label": "Resetar filtro",
+        "filter_label": "Filtrar",
+
+        "action_dropdown_label": "Ações",
+        "action_dropdown_trigger_label": "Abrir menu"
     },
     "Home": {
         "title": "Bem vindo",
@@ -9,6 +26,23 @@
     },
     "Dashboard": {
         "title": "Bem vindo à página inicial do dashboard!",
-        "description": "O seu painel sofisticado para construir seu próprio projeto usando `Next.js`."
+        "description": "O seu painel sofisticado para construir seu próprio projeto usando `Next.js`.",
+
+        "User": {
+            "title": "Usuários",
+
+            "button_label_create": "Novo usuário",
+            
+            "message_success_delete": "Usuário deletado com sucesso.",
+            "message_success_save": "Usuário salvo com sucesso.",
+            "message_error_fetch": "Falha ao recuperar os usuários",
+            "message_error_delete": "Erro deletando usuário",
+            "message_error_save": "Falhou tentando salvar as alterações no servidor.",
+
+            "role_admin_label": "Admin",
+            "role_client_label": "Cliente",
+
+            "filter_submit_label": "Buscar usuário"
+        }
     }
 }

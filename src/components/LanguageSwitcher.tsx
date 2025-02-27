@@ -3,6 +3,7 @@
 import { useRouter } from "next/router";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Languages } from "lucide-react";
 
 const LanguageSwitcher = () => {
   const router = useRouter();
@@ -10,8 +11,8 @@ const LanguageSwitcher = () => {
 
   // Lista de idiomas disponíveis
   const locales = [
-    { code: "en", label: "🇬🇧 English" },
-    { code: "pt", label: "🇧🇷 Português" },
+    { code: "en", label: "English" },
+    { code: "pt", label: "Portuguese (BR)" },
   ];
 
   const changeLanguage = (locale: string) => {
@@ -24,7 +25,11 @@ const LanguageSwitcher = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">🌍 {locales.find(l => l.code === currentLocale)?.label || "Language"}</Button>
+        <Button variant="outline">
+          <Languages />
+
+          {locales.find(l => l.code === currentLocale)?.label || "Language"}
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {locales.map(({ code, label }) => (

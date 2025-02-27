@@ -1,14 +1,50 @@
 {
     "common": {
         "github_button_label": "Go to repository",
-        "dashboard_button_label": "Go to dashboard"
+        "dashboard_button_label": "Go to dashboard",
+
+        "toast_title_error": "Something went wrong",
+        "toast_title_success": "Everything went ok!",
+        
+        "refresh": "Refresh",
+        "loading": "Loading...",
+        "name_label": "Name",
+        "email_label": "Email",
+        "role_label": "Role",
+        "select_placeholder": "Selection an option",
+        "delete_label": "Delete",
+
+        "filter_reset_label": "Reset filter",
+        "filter_label": "Filter",
+
+        "action_dropdown_label": "Actions",
+        "action_dropdown_trigger_label": "Open menu"
     },
+    
     "Home": {
         "title": "Welcome",
         "description": "This project's a full stack application to help the developers to start your project fastly. Enjoy it and good lucky :)"
     },
+
     "Dashboard": {
         "title": "Welcome to dashboard page!",
-        "description": "Your fancy dashboard to helping you building your own `Nexjs` application."
+        "description": "Your fancy dashboard to helping you building your own `Nexjs` application.",
+
+        "User": {
+            "title": "Users",
+
+            "button_label_create": "New User",
+            
+            "message_success_delete": "User delete success.",
+            "message_success_save": "User save success.",
+            "message_error_fetch": "Failed to fetch users",
+            "message_error_delete": "Error deleting user",
+            "message_error_save": "Failed trying save the changes on server.",
+
+            "role_admin_label": "Admin",
+            "role_client_label": "Client",
+
+            "filter_submit_label": "Search user"
+        }
     }
 }

@@ -7,6 +7,7 @@ import {
     DropdownMenu, DropdownMenuContent, DropdownMenuItem, 
     DropdownMenuLabel, DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu"
+import { useTranslations } from "next-intl";
 
 
 interface UserTableActionsCellProps {
@@ -20,6 +21,7 @@ export const UserTableActionsCell = (props: UserTableActionsCellProps = {}) => {
         onActionClick = null
     } = props;
     const { original: userData } = row;
+    const t = useTranslations();
 
     const handleActionClick = (action: string) => {
         if (!onActionClick) return;
@@ -32,19 +34,19 @@ export const UserTableActionsCell = (props: UserTableActionsCellProps = {}) => {
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="h-8 w-8 p-0">
-                        <span className="sr-only">Open menu</span>
+                        <span className="sr-only">{t('common.action_dropdown_trigger_label')}</span>
 
                         <MoreHorizontal className="h-4 w-4" />
                     </Button>
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                    <DropdownMenuLabel>{t('common.action_dropdown_label')}</DropdownMenuLabel>
 
                     <DropdownMenuItem className="text-red-500" onClick={handleActionClick.bind(this, 'delete')}>
                         <Trash />
 
-                        <span>Delete</span>
+                        <span>{t('common.delete_label')}</span>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
