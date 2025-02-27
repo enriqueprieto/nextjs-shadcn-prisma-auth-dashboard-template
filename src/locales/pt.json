@@ -6,5 +6,9 @@
     "Home": {
         "title": "Bem vindo",
         "description": "Este projeto é uma aplicação completa para ajudar desenvolvedores a começar seus projetos rapidamento. Aproveite e boa sorte :)"
+    },
+    "Dashboard": {
+        "title": "Bem vindo à página inicial do dashboard!",
+        "description": "O seu painel sofisticado para construir seu próprio projeto usando `Next.js`."
     }
 }

@@ -6,5 +6,9 @@
     "Home": {
         "title": "Welcome",
         "description": "This project's a full stack application to help the developers to start your project fastly. Enjoy it and good lucky :)"
+    },
+    "Dashboard": {
+        "title": "Welcome to dashboard page!",
+        "description": "Your fancy dashboard to helping you building your own `Nexjs` application."
     }
 }
