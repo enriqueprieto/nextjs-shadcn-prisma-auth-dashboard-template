@@ -8,8 +8,6 @@ interface LayoutProps {
     children?: ReactNode;
 }
 
-export const getStaticProps = getStaticPropsWithIntl();
-
 export default function AppLayout({children}: LayoutProps) {
     return (
         <div className="app-layout">
