@@ -1,3 +1,10 @@
 {
-    "welcome": "Olá Mundo!"
+    "common": {
+        "github_button_label": "Ir para o repositório",
+        "dashboard_button_label": "Ir para o dashboard"
+    },
+    "Home": {
+        "title": "Bem vindo",
+        "description": "Este projeto é uma aplicação completa para ajudar desenvolvedores a começar seus projetos rapidamento. Aproveite e boa sorte :)"
+    }
 }

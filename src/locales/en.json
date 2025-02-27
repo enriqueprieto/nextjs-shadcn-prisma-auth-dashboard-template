@@ -1,3 +1,10 @@
 {
-    "welcome": "Hello World!"
+    "common": {
+        "github_button_label": "Go to repository",
+        "dashboard_button_label": "Go to dashboard"
+    },
+    "Home": {
+        "title": "Welcome",
+        "description": "This project's a full stack application to help the developers to start your project fastly. Enjoy it and good lucky :)"
+    }
 }
