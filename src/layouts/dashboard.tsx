@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/appsidebar";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/toaster";
 import { ReactNode } from "react";
@@ -14,6 +15,8 @@ const DashboardLayout = ({children}: LayoutProps) => {
             <SidebarInset>
                 <header className="flex sticky top-0 bg-background h-16 shrink-0 items-center gap-2 border-b px-4 py-2">
                     <SidebarTrigger />
+                    
+                    <LanguageSwitcher />
                 </header>
 
                 <main className="px-4 py-2">
