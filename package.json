@@ -50,6 +50,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@testing-library/cypress": "^10.0.3",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.6.1",
@@ -58,6 +59,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cypress": "^14.1.0",
     "eslint": "^9",
     "eslint-config-next": "15.1.7",
     "jest": "^29.7.0",
