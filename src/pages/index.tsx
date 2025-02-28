@@ -38,7 +38,6 @@ export default function Home() {
           >
             <Link
               href="/dashboard"
-              target="_blank"
             >
               {t('common.dashboard_button_label')}
             </Link>
